@@ -21,6 +21,12 @@ steps:
   inputs:
     testResultsFiles: '**/TEST-*.xml'
     testRunTitle: 'Test Results for Java'
-- task: PublishPipelineArtifact@0
+- task: CopyFiles@2
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/target/*.jar'
+    contents: '**/*.jar'
+    targetFolder: '$(build.artifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    artifactName: 'jar'
+    pathToPublish: '$(build.artifactStagingDirectory)'
