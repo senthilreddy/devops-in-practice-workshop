@@ -17,3 +17,10 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     goals: 'package'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/TEST-*.xml'
+    testRunTitle: 'Test Results for Java'
+- task: PublishPipelineArtifact@0
+  inputs:
+    targetPath:'$(System.DefaultWorkingDirectory)/target/*.jar'
